@@ -218,9 +218,13 @@ namespace LinqConsoleApp
         /// SELECT TOP 1 * FROM Emp WHERE Job="Frontend programmer"
         /// ORDER BY HireDate DESC;
         /// </summary>
-        public void Przyklad9()
+        public static void Przyklad9()
         {
-
+            var emps = Emps
+                .Where(emp => emp.Job == "Frontend programmer")
+                .OrderByDescending(emp => emp.HireDate)
+                .Take(1);
+            PrintTaskToConsole(emps);
         }
 
         /// <summary>
@@ -234,9 +238,11 @@ namespace LinqConsoleApp
         }
 
         //Znajdź pracownika z najwyższą pensją wykorzystując metodę Aggregate()
-        public void Przyklad11()
+        public static void Przyklad11()
         {
-
+            var empWithMaxSalary = Emps.Aggregate((current, next) => current.Salary > next.Salary ? current : next);
+            Console.WriteLine();
+            Console.WriteLine($"Przyklad11: {empWithMaxSalary}");
         }
 
         //Z pomocą języka LINQ i metody SelectMany wykonaj złączenie
