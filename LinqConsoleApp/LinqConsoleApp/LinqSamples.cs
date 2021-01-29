@@ -164,9 +164,14 @@ namespace LinqConsoleApp
         /// <summary>
         /// SELECT ename AS Nazwisko, job AS Praca FROM Emps;
         /// </summary>
-        public void Przyklad5()
+        public static void Przyklad5()
         {
-
+            var emps = Emps.Select(emp => new
+            {
+                Nazwisko = emp.Ename,
+                Praca = emp.Job
+            });
+            PrintTaskToConsole(emps);
         }
 
         /// <summary>
@@ -174,9 +179,15 @@ namespace LinqConsoleApp
         /// INNER JOIN Depts ON Emps.Deptno=Depts.Deptno
         /// Rezultat: Złączenie kolekcji Emps i Depts.
         /// </summary>
-        public void Przyklad6()
+        public static void Przyklad6()
         {
-
+            var empsDepts = Emps.Join(Depts, emp => emp.Deptno, dept => dept.Deptno, (emp, dept) => new
+            {
+                emp.Ename,
+                emp.Job,
+                dept.Dname
+            });
+            PrintTaskToConsole(empsDepts);
         }
 
         /// <summary>
