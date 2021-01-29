@@ -234,7 +234,7 @@ namespace LinqConsoleApp
         /// </summary>
         public void Przyklad10Button_Click()
         {
-
+            //
         }
 
         //Znajdź pracownika z najwyższą pensją wykorzystując metodę Aggregate()
@@ -247,9 +247,16 @@ namespace LinqConsoleApp
 
         //Z pomocą języka LINQ i metody SelectMany wykonaj złączenie
         //typu CROSS JOIN
-        public void Przyklad12()
+        public static void Przyklad12()
         {
-
+            var empsDepts = Emps.SelectMany(emp => Depts, (emp, dept) => new
+            {
+                EmpDeptno = emp.Deptno,
+                EmpEname = emp.Ename,
+                DeptDeptno = dept.Deptno,
+                DeptDname = dept.Dname
+            });
+            PrintTaskToConsole(empsDepts);
         }
         private static void PrintTaskToConsole(IEnumerable<object> iEnumerable)
         {
